@@ -13,6 +13,14 @@
 # testing
 /coverage
 
+# playwright
+/test-results
+/playwright-report
+/blob-report
+/playwright/.cache
+diag-*.png
+verify-*.png
+
 # next.js
 /.next/
 /out/
@@ -39,3 +47,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+.vscode
+

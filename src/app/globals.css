@@ -1,26 +1,162 @@
 @import "tailwindcss";
 
+/* =====================================================================
+   Sistema de diseño Clyclick — generado con UI UX Pro Max skill
+   Pattern: Enterprise Gateway · Style: Feature-Rich Showcase
+   Modo CLARO profesional (navy + azul). Evitar dark mode por defecto
+   y animación excesiva. Tipografía: Plus Jakarta Sans.
+   ===================================================================== */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f8fafc;
+  --foreground: #020617;
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+  --popover: #ffffff;
+  --popover-foreground: #0f172a;
+
+  --primary: #0369a1;            /* CTA azul */
+  --primary-foreground: #ffffff;
+  --primary-hover: #075985;
+
+  --secondary: #eef2f7;
+  --secondary-foreground: #0f172a;
+  --muted: #f1f5f9;
+  --muted-foreground: #475569;
+  --accent: #e0f2fe;
+  --accent-foreground: #0f172a;
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+  --border: #e2e8f0;
+  --input: #e2e8f0;
+  --ring: #0369a1;
+  --radius: 0.75rem;
+
+  /* Marca / acentos */
+  --brand: #001528;        /* navy profundo de marca (footer, énfasis) */
+  --navy: #0f172a;         /* navy de titulares */
+  --slate: #334155;
+  --teal: #0f766e;         /* permuta (acento funcional) */
+  --teal-light: #11a88a;
+  --whatsapp: #25d366;
+  --amber: #b45309;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-brand: var(--brand);
+  --color-navy: var(--navy);
+  --color-slate: var(--slate);
+  --color-teal: var(--teal);
+  --color-teal-light: var(--teal-light);
+  --color-whatsapp: var(--whatsapp);
+  --color-amber: var(--amber);
+
+  --font-sans: var(--font-jakarta);
+  --font-display: var(--font-syne);
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-jakarta), system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4, h5 {
+    font-family: var(--font-syne), var(--font-jakarta), system-ui, sans-serif;
+    letter-spacing: -0.02em;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Display utility: Syne para titulares de alto impacto */
+.font-display {
+  font-family: var(--font-syne), var(--font-jakarta), system-ui, sans-serif;
+}
+
+/* Mozilla Headline para el hero del ecosistema */
+.font-headline {
+  font-family: "Mozilla Headline", var(--font-syne), system-ui, sans-serif;
+}
+
+/* Resplandor giratorio del hero (firma visual) */
+@keyframes cly-spin-slow {
+  to { transform: rotate(360deg); }
+}
+.cly-spin-slow {
+  animation: cly-spin-slow 28s linear infinite;
+}
+
+/* Órbita del ecosistema: CSS puro (inmune a re-renders de React) */
+@keyframes cly-orbit { to { transform: rotate(360deg); } }
+@keyframes cly-orbit-rev { to { transform: rotate(-360deg); } }
+.cly-orbit { animation: cly-orbit 48s linear infinite; transform-origin: 50% 50%; }
+.cly-orbit-rev { animation: cly-orbit-rev 48s linear infinite; transform-origin: 50% 50%; }
+
+/* Estrellas parpadeantes del fondo espacial */
+@keyframes cly-twinkle { 0%, 100% { opacity: 0.25; } 50% { opacity: 1; } }
+.cly-twinkle { animation: cly-twinkle 4s ease-in-out infinite; }
+
+/* Cursor del efecto de escritura */
+@keyframes cly-caret { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+.cly-caret { animation: cly-caret 1s step-end infinite; }
+
+/* Marquee suave para la franja de confianza */
+@keyframes cly-marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.cly-marquee {
+  animation: cly-marquee 38s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cly-marquee { animation: none !important; }
+  .cly-spin-slow { animation: none !important; }
+  .cly-twinkle { animation: none !important; opacity: 0.7 !important; }
+  html { scroll-behavior: auto; }
+}
+
+/* Link inline reutilizable — naranja, mayúsculas, subrayado */
+.link-inline {
+  color: #FB923C;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-decoration: underline;
+  text-decoration-color: #FB923C;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+  transition: opacity 0.2s;
+}
+.link-inline:hover {
+  opacity: 0.7;
 }
