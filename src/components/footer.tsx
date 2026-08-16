@@ -46,7 +46,9 @@ export function Footer() {
               <li><Link href="/nosotros" className="hover:text-white">Nosotros</Link></li>
               <li><Link href="/faq" className="hover:text-white">Preguntas frecuentes</Link></li>
               <li><Link href="/contacto" className="hover:text-white">Contacto</Link></li>
+              <li><Link href="/dentalnet" className="hover:text-white">DentalNet</Link></li>
               <li><Link href="/privacidad" className="hover:text-white">Política de Privacidad</Link></li>
+              <li><Link href="/terminos" className="hover:text-white">Términos del Servicio</Link></li>
             </ul>
           </div>
 
