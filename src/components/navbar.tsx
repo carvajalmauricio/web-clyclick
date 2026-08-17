@@ -4,15 +4,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { nav, wa } from "@/lib/site";
+import { nav } from "@/lib/site";
+import { CalendlyPopupLink } from "@/components/calendly-popup-link";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
-
-  const meetingHref = wa(
-    "Hola, vengo de la web de Clyclick (CLYCLICK). Quiero agendar una reunión."
-  );
 
   return (
     <header className="sticky top-0 z-50 w-full bg-brand text-white">
@@ -35,14 +31,14 @@ export function Navbar() {
             if (item.columns) {
               return (
                 <div key={item.href} className="group static">
-                  <Link
-                    href={item.href}
+                  <button
+                    type="button"
                     aria-haspopup="menu"
                     className="flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium text-white/80 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
                   >
                     {item.label}
                     <ChevronDown className="h-3.5 w-3.5" aria-hidden="true" />
-                  </Link>
+                  </button>
                   <div className="invisible absolute left-1/2 top-full z-50 w-[min(56rem,calc(100vw-2rem))] -translate-x-1/2 translate-y-1 rounded-2xl border border-border bg-card p-6 opacity-0 shadow-2xl transition-[opacity,transform,visibility] duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
                     <div className="grid grid-cols-3 gap-6">
                       {item.columns.map((col) => (
@@ -76,14 +72,14 @@ export function Navbar() {
             if (item.children) {
               return (
                 <div key={item.href} className="group relative">
-                  <Link
-                    href={item.href}
+                  <button
+                    type="button"
                     aria-haspopup="menu"
                     className="flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium text-white/80 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
                   >
                     {item.label}
                     <ChevronDown className="h-3.5 w-3.5" aria-hidden="true" />
-                  </Link>
+                  </button>
                   <div className="invisible absolute left-0 top-full w-64 translate-y-1 rounded-xl border border-border bg-card p-2 opacity-0 shadow-xl transition-[opacity,transform,visibility] duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
                     {item.children.map((child) => (
                       <Link
@@ -113,14 +109,11 @@ export function Navbar() {
         </nav>
 
         <div className="hidden lg:block">
-          <a
-            href={meetingHref}
-            target="_blank"
-            rel="noopener noreferrer"
+          <CalendlyPopupLink
             className="inline-flex items-center justify-center whitespace-nowrap text-xs font-bold uppercase tracking-widest px-5 py-2.5 bg-[#FB923C] text-white transition-colors duration-200 hover:bg-[#f97316] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FB923C] focus-visible:ring-offset-2"
           >
             Agendar una reunión
-          </a>
+          </CalendlyPopupLink>
         </div>
 
         <button
@@ -139,13 +132,22 @@ export function Navbar() {
           <div className="flex flex-col gap-1">
             {nav.map((item) => (
               <div key={item.href}>
-                <Link
-                  href={item.href}
-                  onClick={() => setOpen(false)}
-                  className="block rounded-lg px-3 py-2.5 text-sm font-semibold text-white"
-                >
-                  {item.label}
-                </Link>
+                {item.columns || item.children ? (
+                  <button
+                    type="button"
+                    className="block rounded-lg px-3 py-2.5 text-sm font-semibold text-white"
+                  >
+                    {item.label}
+                  </button>
+                ) : (
+                  <Link
+                    href={item.href}
+                    onClick={() => setOpen(false)}
+                    className="block rounded-lg px-3 py-2.5 text-sm font-semibold text-white"
+                  >
+                    {item.label}
+                  </Link>
+                )}
 
                 {/* Mega-menú → columnas apiladas */}
                 {item.columns && (
@@ -191,14 +193,11 @@ export function Navbar() {
                 )}
               </div>
             ))}
-            <a
-              href={meetingHref}
-              target="_blank"
-              rel="noopener noreferrer"
+            <CalendlyPopupLink
               className="mt-3 w-full inline-flex items-center justify-center whitespace-nowrap text-xs font-bold uppercase tracking-widest px-8 py-3.5 bg-[#FB923C] text-white transition-colors duration-200 hover:bg-[#f97316] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FB923C] focus-visible:ring-offset-2"
             >
               Agendar una reunión
-            </a>
+            </CalendlyPopupLink>
           </div>
         </div>
       )}

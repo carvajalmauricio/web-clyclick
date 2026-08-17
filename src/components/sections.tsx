@@ -12,8 +12,9 @@ import {
 } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { Globe, type LucideIcon } from "lucide-react";
+import { ChevronLeft, ChevronRight, Globe, X, type LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { CalendlyPopupLink } from "@/components/calendly-popup-link";
 import { Reveal } from "@/components/reveal";
 import {
   ContainerScroll,
@@ -178,8 +179,35 @@ export function Pill({
 
 export function ProductGrid() {
   const [selected, setSelected] = useState<number | null>(1);
+  const [mobileDetailId, setMobileDetailId] = useState<number | null>(null);
   const selectedItem = SOLUTIONS.find((s) => s.id === selected) ?? null;
+  const mobileDetail = SOLUTIONS.find((s) => s.id === mobileDetailId) ?? null;
   const rest = SOLUTIONS.filter((s) => s.id !== selected);
+
+  const selectSolution = (id: number) => {
+    setSelected(id);
+    if (window.matchMedia("(max-width: 767px)").matches) {
+      setMobileDetailId(id);
+    }
+  };
+
+  const handleSelectedPill = () => {
+    if (selectedItem && window.matchMedia("(max-width: 767px)").matches) {
+      setMobileDetailId(selectedItem.id);
+      return;
+    }
+    setSelected(null);
+  };
+
+  const changeMobileDetail = (direction: -1 | 1) => {
+    if (mobileDetailId === null) return;
+    const currentIndex = SOLUTIONS.findIndex((solution) => solution.id === mobileDetailId);
+    const nextIndex = (currentIndex + direction + SOLUTIONS.length) % SOLUTIONS.length;
+    const nextId = SOLUTIONS[nextIndex].id;
+
+    setSelected(nextId);
+    setMobileDetailId(nextId);
+  };
 
   return (
     <section
@@ -208,7 +236,7 @@ export function ProductGrid() {
                 id={selectedItem.id}
                 label={selectedItem.label}
                 selected
-                onClick={() => setSelected(null)}
+                onClick={handleSelectedPill}
               />
             </div>
           )}
@@ -222,7 +250,7 @@ export function ProductGrid() {
                   id={s.id}
                   label={s.label}
                   selected={false}
-                  onClick={() => setSelected(s.id)}
+                  onClick={() => selectSolution(s.id)}
                 />
               ))}
             </motion.div>
@@ -236,7 +264,7 @@ export function ProductGrid() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 10 }}
                   transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                  className="flex-1"
+                  className="hidden flex-1 md:block"
                 >
                   <h3
                     className="font-display text-xl font-bold"
@@ -261,6 +289,80 @@ export function ProductGrid() {
       </div>
 
       {/* Pie de sección: enlace al Programa de Permuta */}
+      <AnimatePresence>
+        {mobileDetail && (
+          <motion.div
+            className="fixed inset-0 z-[60] flex items-center bg-[#001528]/70 p-4 backdrop-blur-sm md:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setMobileDetailId(null)}
+          >
+            <motion.div
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="solution-detail-title"
+              className="relative max-h-[calc(100svh-2rem)] w-full overflow-y-auto rounded-3xl border border-white/20 bg-brand p-6 text-white shadow-2xl"
+              initial={{ opacity: 0, y: 32 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 32 }}
+              transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+              onClick={(event) => event.stopPropagation()}
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-transparent to-teal/20" />
+              <div className="relative">
+                <button
+                  type="button"
+                  onClick={() => setMobileDetailId(null)}
+                  aria-label="Cerrar detalle de la solución"
+                  className="absolute right-0 top-0 inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                >
+                  <X className="h-5 w-5" aria-hidden="true" />
+                </button>
+                <p className="pr-12 text-sm font-semibold uppercase tracking-[0.16em] text-sky-200">
+                  {mobileDetail.label}
+                </p>
+                <h3 id="solution-detail-title" className="mt-3 font-display text-2xl font-bold leading-tight">
+                  {mobileDetail.title}
+                </h3>
+                <p className="mt-4 leading-relaxed text-white/75">
+                  {mobileDetail.description}
+                </p>
+                <div className="mt-6 flex items-center justify-between">
+                  <button
+                    type="button"
+                    onClick={() => changeMobileDetail(-1)}
+                    aria-label="Ver solución anterior"
+                    className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white transition-colors hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                  >
+                    <ChevronLeft className="h-5 w-5" aria-hidden="true" />
+                  </button>
+                  <span className="text-sm font-semibold tabular-nums text-white/70">
+                    {mobileDetail.id} de {SOLUTIONS.length}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => changeMobileDetail(1)}
+                    aria-label="Ver siguiente solución"
+                    className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white transition-colors hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                  >
+                    <ChevronRight className="h-5 w-5" aria-hidden="true" />
+                  </button>
+                </div>
+                <div className="mt-5 flex justify-center">
+                  <a
+                    href={mobileDetail.href}
+                    className="inline-block bg-[#FB923C] px-7 py-3.5 text-sm font-bold uppercase tracking-widest text-white transition-colors hover:bg-[#f97316] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FB923C] focus-visible:ring-offset-2 focus-visible:ring-offset-[#001528]"
+                  >
+                    Elegir
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <p className="mt-6 text-center text-sm font-medium" style={{ color: BRAND }}>
         ¿Tienes productos o servicios intercambiables?{" "}
         <Link
@@ -430,16 +532,11 @@ export function CustomDevBlock() {
                 procesos y lo armamos a tu medida.
               </p>
             </div>
-            <a
-              href={wa(
-                "Hola, vengo de la web de Clyclick (CLYCLICK). Necesito un desarrollo a medida. Hablemos."
-              )}
-              target="_blank"
-              rel="noopener noreferrer"
+            <CalendlyPopupLink
               className="shrink-0 bg-[#FB923C] px-8 py-3.5 text-sm font-bold uppercase tracking-widest text-white transition-colors duration-200 hover:bg-[#f97316] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FB923C] focus-visible:ring-offset-2 focus-visible:ring-offset-brand"
             >
               Hablemos
-            </a>
+            </CalendlyPopupLink>
           </div>
         </div>
       </Reveal>
@@ -680,11 +777,17 @@ export function Niches() {
 function Counter({ to, suffix = "", label }: { to: number; suffix?: string; label: string }) {
   return (
     <div className="text-center">
-      <div className="font-display text-4xl sm:text-5xl font-extrabold text-primary tabular-nums">
-        {to}
-        {suffix}
+      <div className="flex items-baseline justify-center gap-2 text-primary">
+        <span className="text-5xl font-extrabold leading-none tabular-nums sm:text-6xl">
+          {to}
+        </span>
+        {suffix && (
+          <span className="text-xl font-semibold leading-none sm:text-2xl">
+            {suffix.trim()}
+          </span>
+        )}
       </div>
-      <p className="mt-2 text-sm text-muted-foreground">{label}</p>
+      <p className="mt-3 text-sm leading-6 text-muted-foreground">{label}</p>
     </div>
   );
 }
@@ -717,11 +820,11 @@ export function FinalCta() {
             Agenda una demo y velo funcionando
           </h2>
           <p className="mt-4 text-white/70">
-            La mejor forma de decidir es ver el producto trabajando con tu caso.
+            La mejor forma de decidir es ver el producto trabajando con tu caso.{" "}
             Atendemos con capacidad limitada (alrededor de 6 a 10 clientes) para dar
             foco y soporte real.
           </p>
-          <div className="flex flex-col items-center justify-center gap-4">
+          <div className="mt-8 flex flex-col items-center justify-center gap-4">
             <Button asChild size="lg" variant="outlineLight">
               <Link href="/contacto">Ir a Contacto</Link>
             </Button>

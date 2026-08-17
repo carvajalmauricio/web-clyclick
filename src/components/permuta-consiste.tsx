@@ -5,6 +5,7 @@ import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 import Link from "next/link";
 import { Pill, BRAND } from "@/components/sections";
 import { Reveal } from "@/components/reveal";
+import { CalendlyPopupLink } from "@/components/calendly-popup-link";
 import { wa } from "@/lib/site";
 
 const WA_PERMUTA = wa(
@@ -85,12 +86,14 @@ const STEPS: Step[] = [
           </a>
         </p>
         <div className="mt-4">
-          <Link
-            href="/contacto"
+          <a
+            href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=EGf41-EBHUaFmXWN5FQuKxFPZFlsQ8FHjuHX4ZWk2-RUQ1ZCRUxZT0ZZRlAzODBDM0dTSkFNTEgxTS4u"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-block bg-[#FB923C] px-8 py-3.5 text-sm font-bold uppercase tracking-widest text-white transition-colors duration-200 hover:bg-[#f97316] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FB923C] focus-visible:ring-offset-2"
           >
             Llenar formulario
-          </Link>
+          </a>
         </div>
       </>
     ),
@@ -101,16 +104,11 @@ const STEPS: Step[] = [
     title: "Te responderemos a la brevedad posible.",
     content: (
       <div className="mt-4">
-        <a
-          href={wa(
-            "Hola, vengo de la web de Clyclick (*PERMUTA*). Tengo dudas sobre el Programa de Permuta."
-          )}
-          target="_blank"
-          rel="noopener noreferrer"
+        <CalendlyPopupLink
           className="inline-block bg-[#FB923C] px-8 py-3.5 text-sm font-bold uppercase tracking-widest text-white transition-colors duration-200 hover:bg-[#f97316] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FB923C] focus-visible:ring-offset-2"
         >
           Tengo más dudas
-        </a>
+        </CalendlyPopupLink>
       </div>
     ),
   },

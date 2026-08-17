@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Syne } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
@@ -38,6 +39,7 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Mozilla+Headline:wght@200..700&display=swap"
           rel="stylesheet"
         />
+        <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
       </head>
       <body className="min-h-screen flex flex-col bg-background text-foreground">
         <a
@@ -50,6 +52,7 @@ export default function RootLayout({
         <main id="main" className="flex-1">{children}</main>
         <Footer />
         <FloatingWhatsApp />
+        <Script src="https://assets.calendly.com/assets/external/widget.js" strategy="afterInteractive" />
       </body>
     </html>
   );
