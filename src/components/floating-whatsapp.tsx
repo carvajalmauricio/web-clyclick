@@ -6,8 +6,7 @@ import { odontoclickWa } from "@/lib/odontoclick";
 
 export function FloatingWhatsApp() {
   const pathname = usePathname();
-  const isOdontoclick =
-    pathname.startsWith("/odontoclick") || pathname.startsWith("/dentalclick");
+  const isOdontoclick = pathname.startsWith("/odontoclick");
   const href = isOdontoclick
     ? odontoclickWa()
     : wa("Hola, vengo de la web de Clyclick (CLYCLICK). Quiero más información.");

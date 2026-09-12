@@ -31,7 +31,7 @@ const features = [
   {
     icon: FileHeart,
     title: "Historia clínica y odontograma",
-    copy: "Consulta el registro clínico, diagnósticos y tratamientos de cada paciente.",
+    copy: "Lleva el registro clínico, diagnósticos y tratamientos conforme a la normativa del MSP.",
   },
   {
     icon: MessageCircle,
@@ -180,7 +180,7 @@ export function OdontoclickLanding() {
               Menos tiempo organizando. <span className="text-sky-300">Más control de tu consultorio.</span>
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-200">
-              Agenda, historia clínica, odontograma, tratamientos, cobros y facturación electrónica en un solo flujo para tu práctica odontológica.
+              Agenda, historia clínica conforme al MSP, odontograma, tratamientos, cobros y facturación electrónica en un solo flujo para tu práctica odontológica.
             </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -210,7 +210,7 @@ export function OdontoclickLanding() {
           {[
             [UserRoundCheck, "Acompañamiento cercano", "Hablas con el equipo que desarrolla el producto."],
             [Headphones, "Soporte directo", "Atención por WhatsApp de 08:00 a 19:00."],
-            [BadgeCheck, "Creado con odontólogos", "Más de un año de uso y mejora continua."],
+            [BadgeCheck, "Cumplimiento MSP", "Historia clínica preparada conforme a la normativa ecuatoriana."],
           ].map(([Icon, title, copy]) => {
             const FeatureIcon = Icon as typeof UserRoundCheck;
             return (
@@ -332,7 +332,7 @@ export function OdontoclickLanding() {
                 {[
                   "Hasta 2 perfiles de doctor",
                   "Agenda y gestión de pacientes",
-                  "Historia clínica y odontograma",
+                  "Historia clínica conforme al MSP y odontograma",
                   "Facturación electrónica ilimitada",
                   "Hasta 100 recordatorios por WhatsApp",
                   "Soporte y acompañamiento directo",

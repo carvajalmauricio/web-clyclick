@@ -12,8 +12,7 @@ import { odontoclickWa } from "@/lib/odontoclick";
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
-  const isOdontoclick =
-    pathname.startsWith("/odontoclick") || pathname.startsWith("/dentalclick");
+  const isOdontoclick = pathname.startsWith("/odontoclick");
 
   const odontoclickHref = odontoclickWa();
 

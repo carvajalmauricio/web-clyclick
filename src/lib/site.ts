@@ -103,7 +103,7 @@ export const products: Product[] = [
     slug: "odontoclick",
     name: "Odontoclick",
     tag: "Odontología",
-    benefit: "Agenda, historia clínica, odontograma, cobros y facturación en un solo lugar.",
+    benefit: "Historia clínica conforme al MSP, odontograma, agenda, cobros y facturación.",
     price: "$30/mes · impuestos incluidos",
     icon: "Stethoscope",
     keyword: "ODONTOCLICK",
