@@ -1,12 +1,13 @@
-import { SkeletonPage } from "@/components/skeleton-page";
+import type { Metadata } from "next";
+import { OdontoclickLanding } from "@/components/odontoclick-landing";
 
-export default function Page() {
-  return (
-    <SkeletonPage
-      title="DentalClick"
-      tag="Odontología"
-      description="Historia clínica odontológica que cumple la normativa del MSP Ecuador."
-      waKeyword="SALUD"
-    />
-  );
+export const metadata: Metadata = {
+  title: "Odontoclick — Software dental para consultorios en Ecuador",
+  description:
+    "Gestiona agenda, pacientes, historia clínica, odontograma, tratamientos, pagos y facturación electrónica.",
+  alternates: { canonical: "/odontoclick" },
+};
+
+export default function DentalclickCompatibilityPage() {
+  return <OdontoclickLanding />;
 }

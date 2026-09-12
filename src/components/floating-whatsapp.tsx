@@ -1,14 +1,23 @@
 "use client";
 
 import { wa } from "@/lib/site";
+import { usePathname } from "next/navigation";
+import { odontoclickWa } from "@/lib/odontoclick";
 
 export function FloatingWhatsApp() {
+  const pathname = usePathname();
+  const isOdontoclick =
+    pathname.startsWith("/odontoclick") || pathname.startsWith("/dentalclick");
+  const href = isOdontoclick
+    ? odontoclickWa()
+    : wa("Hola, vengo de la web de Clyclick (CLYCLICK). Quiero más información.");
+
   return (
     <a
-      href={wa("Hola, vengo de la web de Clyclick (CLYCLICK). Quiero más información.")}
+      href={href}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Escríbenos por WhatsApp"
+      aria-label={isOdontoclick ? "Probar Odontoclick por WhatsApp" : "Escríbenos por WhatsApp"}
       className="fixed bottom-5 right-5 z-50 inline-flex h-14 w-14 items-center justify-center rounded-full bg-whatsapp text-white shadow-[0_10px_30px_-6px_rgba(37,211,102,0.6)] transition-transform hover:scale-110 active:scale-95"
     >
       <svg viewBox="0 0 32 32" className="h-8 w-8" fill="currentColor" aria-hidden="true">

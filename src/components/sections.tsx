@@ -12,7 +12,13 @@ import {
 } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight, Globe, X, type LucideIcon } from "lucide-react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  Globe,
+  Stethoscope,
+  X,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CalendlyPopupLink } from "@/components/calendly-popup-link";
 import { Reveal } from "@/components/reveal";
@@ -21,7 +27,6 @@ import {
   CardsContainer,
   CardTransformed,
 } from "@/components/ui/animated-cards-stack";
-import { wa } from "@/lib/site";
 
 // Azul de marca (más oscuro)
 export const BRAND = "#023A5E";
@@ -553,13 +558,14 @@ type ArcProduct = {
   logo?: string;
   site?: string; // sitio propio (solo Mishkitap)
   websiteIcon?: boolean; // sin logo/nombre (Websites)
+  medicalIcon?: boolean;
 };
 
 const ARC_PRODUCTS: ArcProduct[] = [
   { name: "Mishkitap", desc: "Administración de restaurantes", price: "Desde $30/mes", href: "/mishkitap", logo: "/logos/MISHKI.png", site: "https://mishkitap.app" },
   { name: "Ecommerce Click", desc: "Plataforma para vender en línea", price: "$1,100/año", href: "/ecommerce", logo: "/logos/ecommerceclick.png" },
   { name: "Click IA", desc: "Agente con IA que atiende en tus redes", price: "$30/mes por canal", href: "/click-ia", logo: "/logos/clickIA.png" },
-  { name: "DentalClick", desc: "Software odontológico que cumple el MSP", price: "$350/año", href: "/dentalclick", logo: "/logos/DentalClick.png" },
+  { name: "Odontoclick", desc: "Gestión diaria para consultorios odontológicos", price: "$30/mes", href: "/odontoclick", medicalIcon: true },
   { name: "Click Peluquerías", desc: "Citas y cobros para peluquerías y barberías", price: "$500/año", href: "/peluquerias", logo: "/logos/clickpeluquerias.png" },
   { name: "Websites", desc: "Páginas y sitios web a medida", price: "Desde $150", href: "/websites", websiteIcon: true },
   { name: "Clyclick Academy", desc: "Capacitación y consultoría en IA y tecnología", price: "Desde $50/sesión", href: "/academy", logo: "/logos/clyclick-academy.png" },
@@ -613,6 +619,8 @@ function ArcCircle({
     >
       {product.websiteIcon ? (
         <Globe className="h-1/2 w-1/2 text-white" />
+      ) : product.medicalIcon ? (
+        <Stethoscope className="h-1/2 w-1/2 text-white" />
       ) : (
         <Image
           src={product.logo as string}

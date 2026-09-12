@@ -3,12 +3,19 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { nav } from "@/lib/site";
 import { CalendlyPopupLink } from "@/components/calendly-popup-link";
+import { odontoclickWa } from "@/lib/odontoclick";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  const isOdontoclick =
+    pathname.startsWith("/odontoclick") || pathname.startsWith("/dentalclick");
+
+  const odontoclickHref = odontoclickWa();
 
   return (
     <header className="sticky top-0 z-50 w-full bg-brand text-white">
@@ -109,11 +116,22 @@ export function Navbar() {
         </nav>
 
         <div className="hidden lg:block">
-          <CalendlyPopupLink
-            className="inline-flex items-center justify-center whitespace-nowrap text-xs font-bold uppercase tracking-widest px-5 py-2.5 bg-[#FB923C] text-white transition-colors duration-200 hover:bg-[#f97316] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FB923C] focus-visible:ring-offset-2"
-          >
-            Agendar una reunión
-          </CalendlyPopupLink>
+          {isOdontoclick ? (
+            <a
+              href={odontoclickHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center whitespace-nowrap text-xs font-bold uppercase tracking-widest px-5 py-2.5 bg-[#FB923C] text-white transition-colors duration-200 hover:bg-[#f97316] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FB923C] focus-visible:ring-offset-2"
+            >
+              Probar 7 días
+            </a>
+          ) : (
+            <CalendlyPopupLink
+              className="inline-flex items-center justify-center whitespace-nowrap text-xs font-bold uppercase tracking-widest px-5 py-2.5 bg-[#FB923C] text-white transition-colors duration-200 hover:bg-[#f97316] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FB923C] focus-visible:ring-offset-2"
+            >
+              Agendar una reunión
+            </CalendlyPopupLink>
+          )}
         </div>
 
         <button
@@ -193,11 +211,23 @@ export function Navbar() {
                 )}
               </div>
             ))}
-            <CalendlyPopupLink
-              className="mt-3 w-full inline-flex items-center justify-center whitespace-nowrap text-xs font-bold uppercase tracking-widest px-8 py-3.5 bg-[#FB923C] text-white transition-colors duration-200 hover:bg-[#f97316] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FB923C] focus-visible:ring-offset-2"
-            >
-              Agendar una reunión
-            </CalendlyPopupLink>
+            {isOdontoclick ? (
+              <a
+                href={odontoclickHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setOpen(false)}
+                className="mt-3 w-full inline-flex items-center justify-center whitespace-nowrap text-xs font-bold uppercase tracking-widest px-8 py-3.5 bg-[#FB923C] text-white transition-colors duration-200 hover:bg-[#f97316] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FB923C] focus-visible:ring-offset-2"
+              >
+                Probar 7 días
+              </a>
+            ) : (
+              <CalendlyPopupLink
+                className="mt-3 w-full inline-flex items-center justify-center whitespace-nowrap text-xs font-bold uppercase tracking-widest px-8 py-3.5 bg-[#FB923C] text-white transition-colors duration-200 hover:bg-[#f97316] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FB923C] focus-visible:ring-offset-2"
+              >
+                Agendar una reunión
+              </CalendlyPopupLink>
+            )}
           </div>
         </div>
       )}

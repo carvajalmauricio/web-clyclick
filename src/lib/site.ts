@@ -38,7 +38,7 @@ export const nav: NavItem[] = [
         href: "/software",
         links: [
           { label: "Mishkitap", href: "/mishkitap" },
-          { label: "DentalClick", href: "/dentalclick" },
+          { label: "Odontoclick", href: "/odontoclick" },
           { label: "Doctorclick", href: "/doctorclick" },
           { label: "Click IA", href: "/click-ia" },
           { label: "Ecommerce Click", href: "/ecommerce" },
@@ -100,13 +100,13 @@ export const products: Product[] = [
     keyword: "MISHKITAP",
   },
   {
-    slug: "dentalclick",
-    name: "DentalClick",
+    slug: "odontoclick",
+    name: "Odontoclick",
     tag: "Odontología",
-    benefit: "Historia clínica odontológica que cumple el MSP.",
-    price: "$350/año · soporte incluido",
+    benefit: "Agenda, historia clínica, odontograma, cobros y facturación en un solo lugar.",
+    price: "$30/mes · impuestos incluidos",
     icon: "Stethoscope",
-    keyword: "SALUD",
+    keyword: "ODONTOCLICK",
   },
   {
     slug: "doctorclick",
