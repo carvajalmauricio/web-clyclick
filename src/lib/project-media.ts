@@ -3,7 +3,7 @@ export type ProjectMedia = {
   productSlug: string;
   title: string;
   description: string;
-  sourceUrl: string;
+  sourceUrl?: string;
 } & (
   | { kind: "image"; src: string; alt: string; width: number; height: number }
   | {

@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { ProjectShowcase } from "@/components/project-showcase";
+import { WebsitePortfolio } from "@/components/website-portfolio";
 import { Check, ArrowRight } from "lucide-react";
 import { wa, products } from "@/lib/site";
 export type ProductContent = {
@@ -16,7 +18,8 @@ export type ProductContent = {
   }[];
 };
 export function ProductPage({ content: c }: { content: ProductContent }) {
-  const summaryPrice = products.find((p) => p.name === c.name)?.price;
+  const product = products.find((p) => p.name === c.name);
+  const summaryPrice = product?.price;
   const href = wa(
     `Hola, me interesa ${c.name}. Quiero ${c.cta.toLowerCase()}.`,
   );
@@ -41,10 +44,24 @@ export function ProductPage({ content: c }: { content: ProductContent }) {
         {summaryPrice && (
           <p className="mt-6 font-semibold text-brand">{summaryPrice}</p>
         )}
-        <a className="cta mt-8" href={href}>
-          {c.cta}
-          <ArrowRight aria-hidden="true" className="h-5 w-5" />
-        </a>
+        <div className="mt-8 flex flex-wrap items-center gap-5">
+          <a className="cta" href={href}>
+            {c.cta}
+            <ArrowRight aria-hidden="true" className="h-5 w-5" />
+          </a>
+          {product && (
+            <a
+              href={
+                product.slug === "websites" ? "#proyectos-web" : "#capturas"
+              }
+              className="inline-flex min-h-12 items-center rounded-lg font-semibold text-primary"
+            >
+              {product.slug === "websites"
+                ? "Ver proyectos web"
+                : "Ver capturas y vídeos"}
+            </a>
+          )}
+        </div>
       </section>
       <section className="border-y border-slate-200 bg-white py-16">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
@@ -67,6 +84,11 @@ export function ProductPage({ content: c }: { content: ProductContent }) {
           </ul>
         </div>
       </section>
+      {product?.slug === "websites" ? (
+        <WebsitePortfolio />
+      ) : (
+        product && <ProjectShowcase productSlug={product.slug} id="capturas" />
+      )}
       <div className="mx-auto grid max-w-6xl gap-6 px-4 py-16 sm:px-6 md:grid-cols-2">
         {c.sections.map((s) => (
           <section

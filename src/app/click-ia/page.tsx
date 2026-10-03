@@ -3,15 +3,15 @@ import { ProductPage } from "@/components/product-page";
 export const metadata: Metadata = {
   title: "Click IA — Agentes de IA para WhatsApp y otros canales | Clyclick",
   description:
-    "Implementamos y personalizamos un agente de IA para responder con la información de tu negocio. WhatsApp es el canal predeterminado.",
+    "Un agente de IA personalizado para responder con la información de tu negocio en WhatsApp y canales opcionales: Telegram, TikTok, Facebook Messenger e Instagram.",
   alternates: { canonical: "/click-ia" },
 };
 const content = {
   name: "Click IA",
   audience: "Atención con inteligencia artificial",
-  headline: "Un agente que responde según tu negocio.",
+  headline: "Tu agente de IA, en los canales de tu negocio.",
   intro:
-    "Implementamos y personalizamos un agente de IA para responder con la información de tu negocio. WhatsApp es el canal predeterminado.",
+    "Un agente de IA personalizado para responder con la información de tu negocio en WhatsApp y canales opcionales: Telegram, TikTok, Facebook Messenger e Instagram.",
   cta: "Solicitar una demo",
   features: [
     "Implementación y personalización según tu negocio",
@@ -20,6 +20,10 @@ const content = {
     "Modelos posibles: OpenAI, Gemini o Claude",
   ],
   sections: [
+    {
+      title: "Elige dónde atender",
+      text: "WhatsApp es el canal predeterminado. Puedes sumar Telegram, TikTok, Facebook Messenger o Instagram. Definimos qué canales necesitas y qué información debe usar el agente para responder según tu negocio.",
+    },
     {
       title: "$30/mes por cada canal",
       items: [

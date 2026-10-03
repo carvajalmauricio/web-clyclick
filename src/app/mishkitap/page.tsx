@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { ProjectShowcase } from "@/components/project-showcase";
 import { wa } from "@/lib/site";
 import { ProductPage } from "@/components/product-page";
 export const metadata: Metadata = {
@@ -84,7 +83,6 @@ export default function Page() {
   return (
     <>
       <ProductPage content={content} />
-      <ProjectShowcase productSlug="mishkitap" id="capturas" />
       <div className="mx-auto flex max-w-6xl flex-wrap gap-5 px-4 pb-12">
         <a
           className="cta"

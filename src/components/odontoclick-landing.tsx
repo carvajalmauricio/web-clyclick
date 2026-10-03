@@ -1,3 +1,4 @@
+import { ProjectShowcase } from "@/components/project-showcase";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -358,6 +359,8 @@ export function OdontoclickLanding() {
           </div>
         </div>
       </section>
+
+      <ProjectShowcase productSlug="odontoclick" id="capturas" />
 
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:py-28">
         <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
