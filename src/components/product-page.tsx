@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ProjectShowcase } from "@/components/project-showcase";
+import { guides } from "@/lib/guides";
 import { WebsitePortfolio } from "@/components/website-portfolio";
 import { Check, ArrowRight } from "lucide-react";
 import { wa, products } from "@/lib/site";
@@ -116,6 +117,24 @@ export function ProductPage({ content: c }: { content: ProductContent }) {
           </section>
         ))}
       </div>
+      {guides
+        .filter((guide) => guide.productSlug === product?.slug)
+        .map((guide) => (
+          <section
+            key={guide.slug}
+            className="mx-auto max-w-6xl px-4 pb-12 sm:px-6"
+          >
+            <h2 className="font-display text-2xl font-bold text-brand">
+              Antes de elegir
+            </h2>
+            <Link
+              href={`/guias/${guide.slug}`}
+              className="mt-3 inline-flex min-h-12 items-center rounded-lg font-semibold text-primary"
+            >
+              {guide.title} →
+            </Link>
+          </section>
+        ))}
       <section className="border-t border-slate-200 px-4 py-12 text-center">
         <h2 className="font-display text-2xl font-bold">
           ¿Quieres conocer {c.name}?

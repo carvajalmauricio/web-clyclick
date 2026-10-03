@@ -25,6 +25,10 @@ const routes = [
   "dentalnet",
   "privacidad",
   "terminos",
+  "guias",
+  "guias/como-elegir-pos-restaurante-ecuador",
+  "guias/agenda-odontograma-consultorio",
+  "guias/agente-ia-whatsapp-canales-costes",
 ];
 for (const route of routes) {
   test(`estructura, enlaces, responsive y accesibilidad automática: /${route}`, async ({

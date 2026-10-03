@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Syne } from "next/font/google";
-import Script from "next/script";
 import "./globals.css";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
@@ -10,14 +9,14 @@ const jakarta = Plus_Jakarta_Sans({
   variable: "--font-jakarta",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800"],
-  display: "swap",
+  display: "optional",
 });
 
 const syne = Syne({
   variable: "--font-syne",
   subsets: ["latin"],
   weight: ["600", "700", "800"],
-  display: "swap",
+  display: "optional",
 });
 
 export const metadata: Metadata = {
@@ -32,12 +31,6 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="es-EC" className={`${jakarta.variable} ${syne.variable}`}>
-      <head>
-        <link
-          href="https://assets.calendly.com/assets/external/widget.css"
-          rel="stylesheet"
-        />
-      </head>
       <body className="min-h-screen flex flex-col bg-background text-foreground">
         <a
           href="#main"
@@ -51,10 +44,6 @@ export default function RootLayout({
         </main>
         <Footer />
         <FloatingWhatsApp />
-        <Script
-          src="https://assets.calendly.com/assets/external/widget.js"
-          strategy="afterInteractive"
-        />
       </body>
     </html>
   );

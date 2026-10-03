@@ -71,7 +71,7 @@ test("el selector del hero responde al teclado y enlaza cada producto", async ({
       hero.getByRole("heading", { level: 2, name: product, exact: true }),
     ).toBeVisible();
     await expect(
-      hero.getByRole("link", { name: `Ver ${product}`, exact: true }),
+      hero.getByRole("link", { name: `Ver producto: ${product}`, exact: true }),
     ).toHaveAttribute("href", href);
     expect(
       await page.evaluate(

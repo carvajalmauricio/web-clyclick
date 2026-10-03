@@ -72,6 +72,7 @@ export function Footer() {
                   Nosotros
                 </Link>
               </li>
+              <li><Link href="/guias" className="hover:text-white">Guías para tu negocio</Link></li>
               <li>
                 <Link href="/faq" className="hover:text-white">
                   Preguntas frecuentes

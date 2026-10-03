@@ -219,7 +219,7 @@ export function Hero() {
                 <Link
                   href="/mishkitap#capturas"
                   className="mt-4 block rounded-lg"
-                  aria-label="Ver las capturas de Mishkitap"
+                  aria-label="Gestión del menú · ampliar captura de Mishkitap"
                 >
                   <Image
                     src="/projects/mishkitap-menu.webp"
@@ -255,7 +255,7 @@ export function Hero() {
                 </p>
                 <Link
                   href={`/${product.slug}`}
-                  aria-label={`Ver ${product.name}`}
+                  aria-label={`Ver producto: ${product.name}`}
                   className="hero-product-link inline-flex min-h-12 items-center gap-2 rounded-lg text-sm font-bold text-primary"
                 >
                   Ver producto{" "}

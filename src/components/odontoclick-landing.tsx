@@ -361,6 +361,10 @@ export function OdontoclickLanding() {
       </section>
 
       <ProjectShowcase productSlug="odontoclick" id="capturas" />
+      <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
+        <h2 className="font-display text-2xl font-bold text-brand">Antes de elegir</h2>
+        <Link href="/guias/agenda-odontograma-consultorio" className="mt-3 inline-flex min-h-12 items-center rounded-lg font-semibold text-primary">Agenda y odontograma digital: qué revisar para tu consultorio →</Link>
+      </section>
 
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:py-28">
         <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-20">

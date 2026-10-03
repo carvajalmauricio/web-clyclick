@@ -89,7 +89,7 @@ export function Niches() {
                 <Link
                   href={`/${p.slug}`}
                   className="cta mt-5"
-                  aria-label={`Conocer ${p.name}`}
+                  aria-label={`Conocer producto: ${p.name}`}
                 >
                   Conocer producto
                 </Link>
@@ -142,7 +142,7 @@ export function ProductGrid() {
             <Link
               href={href}
               className="mt-5 inline-flex min-h-12 items-center font-semibold text-primary"
-              aria-label={`Consultar ${title}`}
+              aria-label={`Consultar servicio: ${title}`}
             >
               Consultar servicio →
             </Link>

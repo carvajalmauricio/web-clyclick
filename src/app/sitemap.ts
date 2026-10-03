@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { guides } from "@/lib/guides";
 
 export const dynamic = "force-static";
 
@@ -26,9 +27,13 @@ const paths = [
   "/redes-telecomunicaciones",
   "/terminos",
   "/transformacion-digital",
-  "/websites"
+  "/websites",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return paths.map((path) => ({ url: `https://clyclick.online${path}` }));
+  return [
+    ...paths,
+    "/guias",
+    ...guides.map((guide) => `/guias/${guide.slug}`),
+  ].map((path) => ({ url: `https://clyclick.online${path}` }));
 }

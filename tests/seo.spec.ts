@@ -7,7 +7,7 @@ test("el sitemap solo incluye páginas accesibles con canonical propio", async (
   const sitemap = await request.get("/sitemap.xml");
   expect(sitemap.status()).toBe(200);
   const urls = [...(await sitemap.text()).matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
-  expect(urls.length).toBe(23);
+  expect(urls.length).toBe(27);
   expect(new Set(urls).size).toBe(urls.length);
   expect(urls).not.toContain("https://clyclick.online/capacitacion");
   for (const url of urls) {

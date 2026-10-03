@@ -25,7 +25,7 @@ test("el catálogo muestra los ocho productos sin un recorrido orbital", async (
       catalog.getByRole("heading", { name, exact: true }),
     ).toBeVisible();
     await expect(
-      catalog.getByRole("link", { name: `Conocer ${name}`, exact: true }),
+      catalog.getByRole("link", { name: `Conocer producto: ${name}`, exact: true }),
     ).toHaveAttribute("href", /^\/[a-z-]+$/);
   }
   expect(await catalog.evaluate((el) => getComputedStyle(el).position)).toBe(
