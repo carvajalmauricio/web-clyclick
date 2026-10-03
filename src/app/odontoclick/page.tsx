@@ -4,7 +4,7 @@ import { OdontoclickLanding } from "@/components/odontoclick-landing";
 export const metadata: Metadata = {
   title: "Odontoclick — Software dental para consultorios en Ecuador",
   description:
-    "Gestiona agenda, pacientes, historia clínica conforme al MSP, odontograma, tratamientos, pagos y facturación electrónica. Prueba guiada de 7 días.",
+    "Gestiona agenda, pacientes, historia clínica conforme al MSP, odontograma, tratamientos, pagos y facturación electrónica. Prueba gratuita de 7 días, sin contratación mínima ni costo de instalación.",
   alternates: { canonical: "/odontoclick" },
   openGraph: {
     title: "Odontoclick — Tu consultorio, en orden",

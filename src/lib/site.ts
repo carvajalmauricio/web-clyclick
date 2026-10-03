@@ -31,11 +31,11 @@ export type NavItem = {
 export const nav: NavItem[] = [
   {
     label: "Servicios",
-    href: "/servicios",
+    href: "/#soluciones",
     columns: [
       {
         label: "Software",
-        href: "/software",
+        href: "/#productos",
         links: [
           { label: "Mishkitap", href: "/mishkitap" },
           { label: "Odontoclick", href: "/odontoclick" },
@@ -58,7 +58,7 @@ export const nav: NavItem[] = [
       },
       {
         label: "Consultorías",
-        href: "/consultorias",
+        href: "/contacto",
         links: [
           { label: "Capacitación", href: "/capacitacion" },
           { label: "Consultoría de IA", href: "/consultoria-ia" },
@@ -71,7 +71,7 @@ export const nav: NavItem[] = [
   },
   {
     label: "Programas",
-    href: "/programas",
+    href: "/permuta",
     children: [{ label: "Programa de Permuta", href: "/permuta" }],
   },
   { label: "Nosotros", href: "/nosotros" },
@@ -103,7 +103,7 @@ export const products: Product[] = [
     slug: "odontoclick",
     name: "Odontoclick",
     tag: "Odontología",
-    benefit: "Historia clínica conforme al MSP, odontograma, agenda, cobros y facturación.",
+    benefit: "Historia clínica, odontograma, agenda, cobros y facturación.",
     price: "$30/mes · impuestos incluidos",
     icon: "Stethoscope",
     keyword: "ODONTOCLICK",
@@ -113,7 +113,7 @@ export const products: Product[] = [
     name: "Doctorclick",
     tag: "Consultorios médicos",
     benefit: "Gestión multiespecialidad para consultorios médicos.",
-    price: "$700/año · soporte aparte",
+    price: "$700/año · soporte $10/hora",
     icon: "Stethoscope",
     keyword: "SALUD",
   },
@@ -121,8 +121,9 @@ export const products: Product[] = [
     slug: "click-ia",
     name: "Click IA",
     tag: "Atención con IA",
-    benefit: "Un agente con IA que atiende, agenda y responde en tus redes.",
-    price: "$30/mes por canal · soporte incluido",
+    benefit:
+      "Respuestas personalizadas para tu negocio, con WhatsApp y canales opcionales.",
+    price: "$30/mes por canal · consumo aparte",
     icon: "Bot",
     keyword: "CLICK IA",
   },
@@ -131,7 +132,7 @@ export const products: Product[] = [
     name: "Ecommerce Click",
     tag: "Vender en línea",
     benefit: "Vende en línea con catálogo, pedidos y dashboard de tu negocio.",
-    price: "$1,100/año · soporte aparte",
+    price: "$1.100/año · soporte $10/hora",
     icon: "ShoppingCart",
     keyword: "VENDER",
   },
@@ -148,8 +149,9 @@ export const products: Product[] = [
     slug: "websites",
     name: "Websites",
     tag: "Páginas y sitios web",
-    benefit: "Desde una landing hasta un sitio web completo a tu medida.",
-    price: "Desde $150 · entregable único",
+    benefit:
+      "Landing page o hasta tres páginas informativas para presentar tu negocio.",
+    price: "Desde $150 · alojamiento sin costo, dominio aparte",
     icon: "Globe",
     keyword: "A MEDIDA",
   },
@@ -157,8 +159,9 @@ export const products: Product[] = [
     slug: "academy",
     name: "Clyclick Academy",
     tag: "Capacitación y IA",
-    benefit: "Capacitación y consultoría en IA y tecnología para tu negocio.",
-    price: "Desde $50/sesión",
+    benefit:
+      "Sesiones prácticas de IA, programación, servidores, APIs, DevOps y cloud computing.",
+    price: "$50 por persona por sesión · equipos a cotizar",
     icon: "Lightbulb",
     keyword: "IA",
   },

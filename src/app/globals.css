@@ -8,14 +8,14 @@
    ===================================================================== */
 
 :root {
-  --background: #f8fafc;
-  --foreground: #020617;
+  --background: #fafaf7;
+  --foreground: #17212b;
   --card: #ffffff;
   --card-foreground: #0f172a;
   --popover: #ffffff;
   --popover-foreground: #0f172a;
 
-  --primary: #0369a1;            /* CTA azul */
+  --primary: #0369a1; /* CTA azul */
   --primary-foreground: #ffffff;
   --primary-hover: #075985;
 
@@ -33,12 +33,12 @@
   --radius: 0.75rem;
 
   /* Marca / acentos */
-  --brand: #001528;        /* navy profundo de marca (footer, énfasis) */
-  --navy: #0f172a;         /* navy de titulares */
+  --brand: #001528; /* navy profundo de marca (footer, énfasis) */
+  --navy: #0f172a; /* navy de titulares */
   --slate: #334155;
-  --teal: #0f766e;         /* permuta (acento funcional) */
+  --teal: #0f766e; /* permuta (acento funcional) */
   --teal-light: #11a88a;
-  --whatsapp: #25d366;
+  --whatsapp: #15803d;
   --amber: #b45309;
 }
 
@@ -91,7 +91,11 @@
     font-family: var(--font-jakarta), system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
   }
-  h1, h2, h3, h4, h5 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
     font-family: var(--font-syne), var(--font-jakarta), system-ui, sans-serif;
     letter-spacing: -0.02em;
   }
@@ -109,54 +113,138 @@
 
 /* Resplandor giratorio del hero (firma visual) */
 @keyframes cly-spin-slow {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 .cly-spin-slow {
   animation: cly-spin-slow 28s linear infinite;
 }
 
 /* Órbita del ecosistema: CSS puro (inmune a re-renders de React) */
-@keyframes cly-orbit { to { transform: rotate(360deg); } }
-@keyframes cly-orbit-rev { to { transform: rotate(-360deg); } }
-.cly-orbit { animation: cly-orbit 48s linear infinite; transform-origin: 50% 50%; }
-.cly-orbit-rev { animation: cly-orbit-rev 48s linear infinite; transform-origin: 50% 50%; }
+@keyframes cly-orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes cly-orbit-rev {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+.cly-orbit {
+  animation: cly-orbit 48s linear infinite;
+  transform-origin: 50% 50%;
+}
+.cly-orbit-rev {
+  animation: cly-orbit-rev 48s linear infinite;
+  transform-origin: 50% 50%;
+}
 
 /* Estrellas parpadeantes del fondo espacial */
-@keyframes cly-twinkle { 0%, 100% { opacity: 0.25; } 50% { opacity: 1; } }
-.cly-twinkle { animation: cly-twinkle 4s ease-in-out infinite; }
+@keyframes cly-twinkle {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+.cly-twinkle {
+  animation: cly-twinkle 4s ease-in-out infinite;
+}
 
 /* Cursor del efecto de escritura */
-@keyframes cly-caret { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-.cly-caret { animation: cly-caret 1s step-end infinite; }
+@keyframes cly-caret {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+.cly-caret {
+  animation: cly-caret 1s step-end infinite;
+}
 
 /* Marquee suave para la franja de confianza */
 @keyframes cly-marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 .cly-marquee {
   animation: cly-marquee 38s linear infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .cly-marquee { animation: none !important; }
-  .cly-spin-slow { animation: none !important; }
-  .cly-twinkle { animation: none !important; opacity: 0.7 !important; }
-  html { scroll-behavior: auto; }
+  .cly-marquee {
+    animation: none !important;
+  }
+  .cly-spin-slow {
+    animation: none !important;
+  }
+  .cly-twinkle {
+    animation: none !important;
+    opacity: 0.7 !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 /* Link inline reutilizable — naranja, mayúsculas, subrayado */
 .link-inline {
-  color: #FB923C;
+  color: #c2410c;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   text-decoration: underline;
-  text-decoration-color: #FB923C;
+  text-decoration-color: #c2410c;
   text-underline-offset: 4px;
   text-decoration-thickness: 2px;
   transition: opacity 0.2s;
 }
 .link-inline:hover {
   opacity: 0.7;
+}
+
+@layer components {
+  .cta {
+    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-[#C2410C] px-6 py-3 text-center font-semibold text-white transition-colors hover:bg-[#9A3412];
+  }
+}
+@layer base {
+  :where(a, button, summary, input, textarea, select):focus-visible {
+    outline: 3px solid #0369a1;
+    outline-offset: 4px;
+  }
+  :where(header, footer, .bg-brand) :where(a, button):focus-visible {
+    outline-color: #fff;
+  }
+  section[id] {
+    scroll-margin-top: 5rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+#main {
+  scroll-margin-top: 5rem;
+}
+
+header .nav-disclosure-panel :where(a, button):focus-visible {
+  outline-color: #0369a1;
 }

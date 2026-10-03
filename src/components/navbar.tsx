@@ -1,234 +1,225 @@
 "use client";
-
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Menu, X, ChevronDown } from "lucide-react";
-import { nav } from "@/lib/site";
+import { nav, type NavItem } from "@/lib/site";
 import { CalendlyPopupLink } from "@/components/calendly-popup-link";
 import { odontoclickWa } from "@/lib/odontoclick";
-
+function NavDisclosure({ item }: { item: NavItem }) {
+  const [open, setOpen] = useState(false);
+  const button = useRef<HTMLButtonElement>(null);
+  const container = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!open) return;
+    const closeOutside = (event: PointerEvent) => {
+      if (
+        event.target instanceof Node &&
+        !container.current?.contains(event.target)
+      )
+        setOpen(false);
+    };
+    document.addEventListener("pointerdown", closeOutside);
+    return () => document.removeEventListener("pointerdown", closeOutside);
+  }, [open]);
+  const id = `nav-${item.label.toLowerCase()}`;
+  return (
+    <div
+      ref={container}
+      className="relative"
+      onBlur={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false);
+      }}
+      onKeyDown={(event) => {
+        if (event.key === "Escape" && open) {
+          event.preventDefault();
+          event.stopPropagation();
+          setOpen(false);
+          button.current?.focus();
+        }
+      }}
+    >
+      <button
+        ref={button}
+        type="button"
+        aria-expanded={open}
+        aria-controls={id}
+        onClick={() => setOpen(!open)}
+        className="flex min-h-12 items-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold"
+      >
+        {item.label}
+        <ChevronDown className="h-4 w-4" aria-hidden="true" />
+      </button>
+      {open && (
+        <div
+          id={id}
+          className={`nav-disclosure-panel absolute top-full z-50 rounded-2xl border border-slate-200 bg-white p-5 text-[#17212B] shadow-xl ${item.columns ? "-left-12 grid w-[min(54rem,calc(100vw-2rem))] grid-cols-3 gap-6" : "left-0 w-64"}`}
+        >
+          {item.columns
+            ? item.columns.map((col) => (
+                <div key={col.label}>
+                  <Link
+                    href={col.href}
+                    onClick={() => setOpen(false)}
+                    className="inline-flex min-h-12 items-center font-bold text-primary"
+                  >
+                    {col.label}
+                  </Link>
+                  <ul className="mt-2 space-y-1">
+                    {col.links.map((link) => (
+                      <li key={link.href}>
+                        <Link
+                          href={link.href}
+                          onClick={() => setOpen(false)}
+                          className="block rounded-lg px-2 py-2 text-sm hover:bg-sky-50"
+                        >
+                          {link.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))
+            : item.children?.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setOpen(false)}
+                  className="block rounded-lg px-3 py-3 text-sm hover:bg-sky-50"
+                >
+                  {link.label}
+                </Link>
+              ))}
+        </div>
+      )}
+    </div>
+  );
+}
 export function Navbar() {
   const [open, setOpen] = useState(false);
+  const toggle = useRef<HTMLButtonElement>(null);
   const pathname = usePathname();
-  const isOdontoclick = pathname.startsWith("/odontoclick");
-
-  const odontoclickHref = odontoclickWa();
-
+  const trial = pathname.startsWith("/odontoclick");
   return (
-    <header className="sticky top-0 z-50 w-full bg-brand text-white">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
-        <Link href="/" className="flex items-center gap-2 font-display font-bold text-lg text-white">
+    <header
+      className="sticky top-0 z-50 bg-brand text-white"
+      onKeyDown={(event) => {
+        if (event.key === "Escape" && open) {
+          setOpen(false);
+          toggle.current?.focus();
+        }
+      }}
+    >
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6">
+        <Link
+          href="/"
+          className="flex shrink-0 items-center gap-2 font-display text-lg font-bold"
+        >
           <Image
             src="/logo-clyclick.png"
-            alt="Clyclick"
-            width={48}
-            height={48}
+            alt=""
+            width={44}
+            height={44}
             className="h-11 w-11 object-contain"
             priority
           />
           <span>Clyclick</span>
         </Link>
-
-        <nav className="hidden lg:flex items-center gap-1">
-          {nav.map((item) => {
-            // Mega-menú (Servicios): columnas con sub-navegación
-            if (item.columns) {
-              return (
-                <div key={item.href} className="group static">
-                  <button
-                    type="button"
-                    aria-haspopup="menu"
-                    className="flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium text-white/80 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
-                  >
-                    {item.label}
-                    <ChevronDown className="h-3.5 w-3.5" aria-hidden="true" />
-                  </button>
-                  <div className="invisible absolute left-1/2 top-full z-50 w-[min(56rem,calc(100vw-2rem))] -translate-x-1/2 translate-y-1 rounded-2xl border border-border bg-card p-6 opacity-0 shadow-2xl transition-[opacity,transform,visibility] duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
-                    <div className="grid grid-cols-3 gap-6">
-                      {item.columns.map((col) => (
-                        <div key={col.href}>
-                          <Link
-                            href={col.href}
-                            className="text-sm font-semibold text-brand hover:text-primary transition-colors"
-                          >
-                            {col.label}
-                          </Link>
-                          <div className="mt-3 flex flex-col gap-1">
-                            {col.links.map((link) => (
-                              <Link
-                                key={link.href}
-                                href={link.href}
-                                className="rounded-lg px-3 py-1.5 text-sm text-foreground/70 hover:bg-secondary hover:text-primary transition-colors"
-                              >
-                                {link.label}
-                              </Link>
-                            ))}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              );
-            }
-
-            // Submenú simple (Programas)
-            if (item.children) {
-              return (
-                <div key={item.href} className="group relative">
-                  <button
-                    type="button"
-                    aria-haspopup="menu"
-                    className="flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium text-white/80 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
-                  >
-                    {item.label}
-                    <ChevronDown className="h-3.5 w-3.5" aria-hidden="true" />
-                  </button>
-                  <div className="invisible absolute left-0 top-full w-64 translate-y-1 rounded-xl border border-border bg-card p-2 opacity-0 shadow-xl transition-[opacity,transform,visibility] duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
-                    {item.children.map((child) => (
-                      <Link
-                        key={child.href}
-                        href={child.href}
-                        className="block rounded-lg px-3 py-2 text-sm text-foreground/80 hover:bg-secondary hover:text-primary transition-colors"
-                      >
-                        {child.label}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              );
-            }
-
-            // Enlace plano
-            return (
+        <nav
+          aria-label="Navegación principal"
+          className="hidden items-center gap-1 lg:flex"
+        >
+          {nav.map((item) =>
+            item.columns || item.children ? (
+              <NavDisclosure key={`${pathname}-${item.label}`} item={item} />
+            ) : (
               <Link
                 key={item.href}
                 href={item.href}
-                className="rounded-lg px-3 py-2 text-sm font-medium text-white/80 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+                aria-current={pathname === item.href ? "page" : undefined}
+                className="inline-flex min-h-12 items-center rounded-lg px-3 text-sm font-semibold"
               >
                 {item.label}
               </Link>
-            );
-          })}
+            ),
+          )}
         </nav>
-
         <div className="hidden lg:block">
-          {isOdontoclick ? (
-            <a
-              href={odontoclickHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center whitespace-nowrap text-xs font-bold uppercase tracking-widest px-5 py-2.5 bg-[#FB923C] text-white transition-colors duration-200 hover:bg-[#f97316] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FB923C] focus-visible:ring-offset-2"
-            >
-              Probar 7 días
+          {trial ? (
+            <a href={odontoclickWa()} className="cta text-sm">
+              Probar gratis 7 días
             </a>
           ) : (
-            <CalendlyPopupLink
-              className="inline-flex items-center justify-center whitespace-nowrap text-xs font-bold uppercase tracking-widest px-5 py-2.5 bg-[#FB923C] text-white transition-colors duration-200 hover:bg-[#f97316] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FB923C] focus-visible:ring-offset-2"
-            >
+            <CalendlyPopupLink className="cta text-sm">
               Agendar una reunión
             </CalendlyPopupLink>
           )}
         </div>
-
         <button
-          className="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-lg bg-white/20 text-[#FB923C] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FB923C]/60"
-          onClick={() => setOpen((v) => !v)}
+          ref={toggle}
+          type="button"
+          className="flex h-12 w-12 items-center justify-center rounded-lg lg:hidden"
           aria-label={open ? "Cerrar menú" : "Abrir menú"}
           aria-expanded={open}
           aria-controls="mobile-menu"
+          onClick={() => setOpen(!open)}
         >
-          {open ? <X className="h-6 w-6" aria-hidden="true" /> : <Menu className="h-6 w-6" aria-hidden="true" />}
+          {open ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
         </button>
       </div>
-
       {open && (
-        <div id="mobile-menu" className="lg:hidden max-h-[calc(100vh-4rem)] overflow-y-auto bg-brand px-4 py-4">
-          <div className="flex flex-col gap-1">
-            {nav.map((item) => (
-              <div key={item.href}>
-                {item.columns || item.children ? (
-                  <button
-                    type="button"
-                    className="block rounded-lg px-3 py-2.5 text-sm font-semibold text-white"
-                  >
-                    {item.label}
-                  </button>
-                ) : (
-                  <Link
-                    href={item.href}
-                    onClick={() => setOpen(false)}
-                    className="block rounded-lg px-3 py-2.5 text-sm font-semibold text-white"
-                  >
-                    {item.label}
-                  </Link>
-                )}
-
-                {/* Mega-menú → columnas apiladas */}
-                {item.columns && (
-                  <div className="ml-3 flex flex-col gap-3 border-l border-white/10 pl-3 pb-2">
-                    {item.columns.map((col) => (
-                      <div key={col.href}>
-                        <Link
-                          href={col.href}
-                          onClick={() => setOpen(false)}
-                          className="block px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-teal-light"
-                        >
-                          {col.label}
-                        </Link>
-                        {col.links.map((link) => (
-                          <Link
-                            key={link.href}
-                            href={link.href}
-                            onClick={() => setOpen(false)}
-                            className="block rounded-lg px-3 py-2 text-sm text-white/70 hover:text-white"
-                          >
-                            {link.label}
-                          </Link>
-                        ))}
-                      </div>
-                    ))}
-                  </div>
-                )}
-
-                {/* Submenú simple */}
-                {item.children && (
-                  <div className="ml-3 flex flex-col gap-1 border-l border-white/10 pl-3 pb-2">
-                    {item.children.map((child) => (
-                      <Link
-                        key={child.href}
-                        href={child.href}
-                        onClick={() => setOpen(false)}
-                        className="block rounded-lg px-3 py-2 text-sm text-white/70 hover:text-white"
-                      >
-                        {child.label}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-            {isOdontoclick ? (
-              <a
-                href={odontoclickHref}
-                target="_blank"
-                rel="noopener noreferrer"
+        <nav
+          id="mobile-menu"
+          aria-label="Navegación móvil"
+          className="max-h-[calc(100svh-4rem)] overflow-y-auto border-t border-white/20 px-4 py-4 lg:hidden"
+        >
+          {nav.map((item) => (
+            <div key={item.label}>
+              <Link
+                href={item.href}
                 onClick={() => setOpen(false)}
-                className="mt-3 w-full inline-flex items-center justify-center whitespace-nowrap text-xs font-bold uppercase tracking-widest px-8 py-3.5 bg-[#FB923C] text-white transition-colors duration-200 hover:bg-[#f97316] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FB923C] focus-visible:ring-offset-2"
+                className="block rounded-lg px-3 py-3 font-semibold"
               >
-                Probar 7 días
-              </a>
-            ) : (
-              <CalendlyPopupLink
-                className="mt-3 w-full inline-flex items-center justify-center whitespace-nowrap text-xs font-bold uppercase tracking-widest px-8 py-3.5 bg-[#FB923C] text-white transition-colors duration-200 hover:bg-[#f97316] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FB923C] focus-visible:ring-offset-2"
-              >
-                Agendar una reunión
-              </CalendlyPopupLink>
-            )}
-          </div>
-        </div>
+                {item.label}
+              </Link>
+              {item.columns?.map((col) => (
+                <div
+                  key={col.label}
+                  className="ml-3 border-l border-white/30 pl-3"
+                >
+                  <Link
+                    href={col.href}
+                    onClick={() => setOpen(false)}
+                    className="block px-3 py-3 text-sm font-bold text-sky-200"
+                  >
+                    {col.label}
+                  </Link>
+                  {col.links.map((link) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => setOpen(false)}
+                      className="block rounded-lg px-3 py-3 text-sm"
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </div>
+              ))}
+              {item.children?.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setOpen(false)}
+                  className="ml-3 block px-3 py-3 text-sm"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          ))}
+        </nav>
       )}
     </header>
   );

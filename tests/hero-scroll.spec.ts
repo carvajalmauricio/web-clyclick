@@ -1,80 +1,50 @@
 import { test, expect } from "@playwright/test";
 
-const FULL = "A UN CLICK DE HACER REALIDAD TUS SUEÑOS";
+test("mensaje y acción visibles desde el inicio incluso sin JavaScript", async ({
+  browser,
+  baseURL,
+}) => {
+  const context = await browser.newContext({ javaScriptEnabled: false });
+  const page = await context.newPage();
+  await page.goto(baseURL!);
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+    "Software y tecnología para hacer crecer tu negocio en Ecuador.",
+  );
+  await expect(
+    page.getByRole("link", { name: "Explorar productos" }),
+  ).toBeVisible();
+  await page.getByRole("link", { name: "Explorar productos" }).click();
+  await expect(page).toHaveURL(/#productos$/);
+  await expect(page.locator("#productos")).toBeInViewport();
+  await context.close();
+});
 
-async function headline(page: import("@playwright/test").Page) {
-  const txt = await page.locator("[data-headline]").textContent();
-  return (txt ?? "").trim();
-}
-
-test("el texto del hero se escribe solo y se completa (todas las pantallas)", async ({
+test("movimiento reducido conserva el contenido y la navegación", async ({
   page,
-}, info) => {
-  await page.goto("/", { waitUntil: "domcontentloaded" });
-  await expect(page.locator("[data-headline]")).toBeVisible();
-
-  // Sin tocar nada, las letras aparecen y la frase se completa.
-  await expect.poll(() => headline(page), { timeout: 10000, intervals: [200] }).toBe(FULL);
-
-  // El texto es blanco y visible (no invisible).
-  const vis = await page.locator("[data-headline] span").first().evaluate((el) => {
-    const cs = getComputedStyle(el);
-    const r = el.getBoundingClientRect();
-    return { color: cs.color, opacity: cs.opacity, width: r.width };
-  });
-  expect(vis.opacity).toBe("1");
-  expect(vis.width).toBeGreaterThan(20);
-
-  await page.screenshot({ path: `verify-${info.project.name}.png` });
+}) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/");
+  await page.getByRole("link", { name: "Explorar productos" }).click();
+  await expect(page.locator("#productos")).toBeInViewport();
+  await expect
+    .poll(() =>
+      page.evaluate(
+        () =>
+          document.getAnimations().filter((a) => a.playState === "running")
+            .length,
+      ),
+    )
+    .toBe(0);
 });
 
-test("la página NO está bloqueada (scroll, zoom y menú funcionan)", async ({ page }) => {
-  await page.goto("/", { waitUntil: "domcontentloaded" });
-
-  const state = await page.evaluate(() => {
-    const b = getComputedStyle(document.body);
-    const h = getComputedStyle(document.documentElement);
-    return {
-      bodyPosition: b.position,
-      bodyOverflow: b.overflow,
-      bodyTouchAction: b.touchAction,
-      htmlOverflow: h.overflow,
-      scrollable: document.documentElement.scrollHeight > window.innerHeight,
-    };
-  });
-
-  expect(state.bodyPosition).not.toBe("fixed");
-  expect(state.bodyTouchAction).not.toBe("none");
-  expect(state.bodyOverflow).not.toBe("hidden");
-  expect(state.htmlOverflow).not.toBe("hidden");
-  expect(state.scrollable).toBe(true);
-
-  await page.evaluate(() => window.scrollTo(0, 600));
-  await page.waitForTimeout(300);
-  const y = await page.evaluate(() => window.scrollY);
-  expect(y).toBeGreaterThan(100);
-});
-
-test("el botón EMPEZAR aparece al completar y navega al hacer click", async ({ page }) => {
-  await page.goto("/", { waitUntil: "domcontentloaded" });
-
-  const cta = page.locator("[data-cta]");
-  await expect(cta).toBeVisible({ timeout: 10000 });
-
-  const before = await page.evaluate(() => window.scrollY);
-  await cta.click();
-  await page.waitForTimeout(1300);
-  const after = await page.evaluate(() => window.scrollY);
-  expect(after).toBeGreaterThan(before);
-});
-
-test("el menú hamburguesa funciona en móvil", async ({ page }, info) => {
-  test.skip(!["mobile"].includes(info.project.name), "Solo en móvil");
-  await page.goto("/", { waitUntil: "domcontentloaded" });
-
-  const toggle = page.getByRole("button", { name: /menú/i });
-  await expect(toggle).toBeVisible();
-  await toggle.click();
-  await expect(page.locator("#mobile-menu")).toBeVisible();
-  await expect(page.locator("#mobile-menu").getByText("Servicios")).toBeVisible();
+test("el enlace de salto lleva el foco al contenido principal", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await page.keyboard.press("Tab");
+  await expect(
+    page.getByRole("link", { name: "Saltar al contenido" }),
+  ).toBeFocused();
+  await page.keyboard.press("Enter");
+  await expect(page.locator("#main")).toBeFocused();
 });

@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Clyclick
 
-## Getting Started
+Sitio informativo en Next.js 16.2.9, React 19.2.4, TypeScript y Tailwind CSS 4. Usa exportación estática (`output: "export"`) e imágenes sin optimizador. Tipografías: Syne y Plus Jakarta Sans.
 
-First, run the development server:
+## Desarrollo
+
+Entorno verificado: Node 24.19.0 y npm 11.9.0.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm ci
+npm run dev -- --hostname 0.0.0.0
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Antes de modificar código, lee `AGENTS.md` y las guías relevantes incluidas en `node_modules/next/dist/docs/`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Producción local
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+`npm start` sirve `out/` en el puerto 3210 y admite rutas como `/mishkitap` con su archivo `.html`. El servidor incluido es para comprobaciones locales. El alojamiento de producción debe servir los archivos de `out/` con esa misma resolución de rutas. `next start` no sirve esta exportación.
 
-To learn more about Next.js, take a look at the following resources:
+La compilación descarga las fuentes desde Google Fonts. Necesita acceso a `fonts.googleapis.com` y `fonts.gstatic.com`. Calendly tiene un enlace directo como alternativa al popup si su script no está disponible.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Validación
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npx tsc --noEmit
+npm run lint
+npx playwright install chromium webkit
+# Si el sistema necesita bibliotecas y tienes permisos:
+npx playwright install-deps chromium webkit
+npm run test:e2e -- --project=desktop --project=mobile --project=tablet --workers=2
+# Con dependencias de WebKit disponibles:
+npm run test:e2e -- --project=safari --workers=2
+```
 
-## Deploy on Vercel
+Playwright compila y sirve la exportación estática. El puerto 3210 debe estar libre para evitar comprobar una versión anterior. Las pruebas incluyen estructura, rutas, imágenes, condiciones comerciales, navegación por teclado, movimiento reducido, contenido sin JavaScript y comprobaciones automáticas con axe. Las capturas se guardan en `test-results/`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Las comprobaciones automáticas no constituyen certificación WCAG ni estudio de seguimiento ocular.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Contenido comercial
+
+Los precios y resúmenes del catálogo están en `src/lib/site.ts`; los detalles en las páginas de `src/app/`. Las páginas de servicios invitan a definir una propuesta. El documento [propuesta de servicios](docs/propuesta-servicios.md) contiene alcances sugeridos para desarrollar la oferta, todavía sin precios ni compromisos comerciales.

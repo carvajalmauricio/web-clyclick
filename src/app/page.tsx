@@ -4,7 +4,6 @@ import {
   WhyClyclick,
   CustomDevBlock,
   Niches,
-  Trust,
   FinalCta,
 } from "@/components/sections";
 
@@ -12,11 +11,10 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <ProductGrid />
+      <Niches />
       <WhyClyclick />
       <CustomDevBlock />
-      <Niches />
-      <Trust />
+      <ProductGrid />
       <FinalCta />
     </>
   );

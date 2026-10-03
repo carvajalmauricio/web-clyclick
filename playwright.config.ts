@@ -9,15 +9,18 @@ export default defineConfig({
     baseURL: "http://localhost:3210",
   },
   webServer: {
-    command: "npx next start -p 3210",
+    command: "npm run build && node scripts/serve-export.mjs",
     url: "http://localhost:3210",
-    reuseExistingServer: true,
+    reuseExistingServer: false,
     timeout: 120000,
   },
   projects: [
     {
       name: "desktop",
-      use: { ...devices["Desktop Chrome"], viewport: { width: 1440, height: 900 } },
+      use: {
+        ...devices["Desktop Chrome"],
+        viewport: { width: 1440, height: 900 },
+      },
     },
     {
       name: "mobile",
@@ -39,7 +42,10 @@ export default defineConfig({
     },
     {
       name: "safari",
-      use: { ...devices["Desktop Safari"], viewport: { width: 1440, height: 900 } },
+      use: {
+        ...devices["Desktop Safari"],
+        viewport: { width: 1440, height: 900 },
+      },
     },
   ],
 });

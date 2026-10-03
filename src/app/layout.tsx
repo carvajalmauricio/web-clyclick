@@ -33,13 +33,10 @@ export default function RootLayout({
   return (
     <html lang="es-EC" className={`${jakarta.variable} ${syne.variable}`}>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Mozilla+Headline:wght@200..700&display=swap"
+          href="https://assets.calendly.com/assets/external/widget.css"
           rel="stylesheet"
         />
-        <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
       </head>
       <body className="min-h-screen flex flex-col bg-background text-foreground">
         <a
@@ -49,10 +46,15 @@ export default function RootLayout({
           Saltar al contenido
         </a>
         <Navbar />
-        <main id="main" className="flex-1">{children}</main>
+        <main tabIndex={-1} id="main" className="flex-1">
+          {children}
+        </main>
         <Footer />
         <FloatingWhatsApp />
-        <Script src="https://assets.calendly.com/assets/external/widget.js" strategy="afterInteractive" />
+        <Script
+          src="https://assets.calendly.com/assets/external/widget.js"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );

@@ -12,12 +12,12 @@ interface SkeletonPageProps {
 export function SkeletonPage({
   title,
   tag,
-  description = "Contenido próximamente. Mientras tanto, escríbenos y te contamos todo.",
+  description = "Cuéntanos tu objetivo para acordar el alcance del servicio.",
   cta = "Más información",
   waKeyword = "CLYCLICK",
 }: SkeletonPageProps) {
   return (
-    <main className="mx-auto max-w-4xl px-4 py-24 sm:px-6">
+    <div className="mx-auto max-w-4xl px-4 py-24 sm:px-6">
       {tag && (
         <span className="text-sm font-semibold uppercase tracking-wider text-primary">
           {tag}
@@ -31,20 +31,22 @@ export function SkeletonPage({
       </p>
       <div className="mt-10 flex flex-wrap gap-4">
         <a
-          href={wa(`Hola, vengo de la web de Clyclick (*${waKeyword}*). Quiero saber más sobre ${title}.`)}
+          href={wa(
+            `Hola, vengo de la web de Clyclick (*${waKeyword}*). Quiero saber más sobre ${title}.`,
+          )}
           target="_blank"
           rel="noopener noreferrer"
-          className="bg-[#FB923C] px-8 py-3.5 text-sm font-bold uppercase tracking-widest text-white transition-colors duration-200 hover:bg-[#f97316] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FB923C] focus-visible:ring-offset-2"
+          className="bg-[#C2410C] px-8 py-3.5 text-sm font-bold uppercase tracking-widest text-white transition-colors duration-200 hover:bg-[#9A3412] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FB923C] focus-visible:ring-offset-2"
         >
           {cta}
         </a>
         <Link
           href="/"
-          className="px-8 py-3.5 text-sm font-semibold uppercase tracking-widest text-primary transition-colors duration-200 hover:text-primary/70"
+          className="min-h-12 rounded-xl px-8 py-3.5 text-sm font-semibold uppercase tracking-widest text-primary transition-colors duration-200 hover:text-primary/70"
         >
           ← Volver al inicio
         </Link>
       </div>
-    </main>
+    </div>
   );
 }
