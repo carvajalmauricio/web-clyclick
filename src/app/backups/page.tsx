@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ServicePage } from "@/components/service-page";
 export const metadata: Metadata = {
+  alternates: { canonical: "/backups" },
   title: "Backups y recuperación — Clyclick",
   description:
     "Consulta opciones de respaldo y recuperación para los datos de tu empresa.",

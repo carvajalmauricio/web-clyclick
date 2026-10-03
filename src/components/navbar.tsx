@@ -51,8 +51,9 @@ function NavDisclosure({ item }: { item: NavItem }) {
         {item.label}
         <ChevronDown className="h-4 w-4" aria-hidden="true" />
       </button>
-      {open && (
         <div
+          hidden={!open}
+          style={{ display: open ? undefined : "none" }}
           id={id}
           className={`nav-disclosure-panel absolute top-full z-50 rounded-2xl border border-slate-200 bg-white p-5 text-[#17212B] shadow-xl ${item.columns ? "-left-12 grid w-[min(54rem,calc(100vw-2rem))] grid-cols-3 gap-6" : "left-0 w-64"}`}
         >
@@ -92,7 +93,6 @@ function NavDisclosure({ item }: { item: NavItem }) {
                 </Link>
               ))}
         </div>
-      )}
     </div>
   );
 }

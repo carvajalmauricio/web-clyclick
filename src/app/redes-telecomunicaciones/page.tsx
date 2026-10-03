@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ServicePage } from "@/components/service-page";
 export const metadata: Metadata = {
+  alternates: { canonical: "/redes-telecomunicaciones" },
   title: "Redes y telecomunicaciones — Clyclick",
   description:
     "Consulta el diseño, instalación y configuración de redes empresariales según las necesidades de tu espacio.",

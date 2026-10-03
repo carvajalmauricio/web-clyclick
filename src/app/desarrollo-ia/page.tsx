@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ServicePage } from "@/components/service-page";
 export const metadata: Metadata = {
+  alternates: { canonical: "/desarrollo-ia" },
   title: "Desarrollo con IA — Clyclick",
   description:
     "Consulta un proyecto a medida para aplicar inteligencia artificial a una necesidad concreta de tu operación.",

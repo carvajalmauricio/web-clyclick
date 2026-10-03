@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ServicePage } from "@/components/service-page";
 export const metadata: Metadata = {
+  alternates: { canonical: "/transformacion-digital" },
   title: "Transformación digital — Clyclick",
   description:
     "Conversemos sobre cómo organizar y digitalizar procesos de tu negocio con prioridades claras.",

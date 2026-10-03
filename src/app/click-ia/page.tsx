@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { ProductPage } from "@/components/product-page";
 export const metadata: Metadata = {
-  title: "Click IA — Clyclick",
+  title: "Click IA — Agentes de IA para WhatsApp y otros canales | Clyclick",
   description:
     "Implementamos y personalizamos un agente de IA para responder con la información de tu negocio. WhatsApp es el canal predeterminado.",
   alternates: { canonical: "/click-ia" },

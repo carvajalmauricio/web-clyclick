@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ServicePage } from "@/components/service-page";
 export const metadata: Metadata = {
+  alternates: { canonical: "/power-bi" },
   title: "Power BI / Business Intelligence — Clyclick",
   description:
     "Consulta dashboards y reportes para entender los datos de tu negocio y apoyar tus decisiones.",

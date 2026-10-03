@@ -3,6 +3,7 @@ import Link from "next/link";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/privacidad" },
   title: "Política de Privacidad | Clyclick y DentalNet",
   description: "Política de privacidad de CLYCLICK S.A.S. para sus plataformas, incluido DentalNet y su integración opcional con Google Calendar.",
 };

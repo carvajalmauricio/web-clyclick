@@ -4,6 +4,7 @@ import { CalendarCheck, LockKeyhole, Stethoscope } from "lucide-react";
 import { site, wa } from "@/lib/site";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/dentalnet" },
   title: "DentalNet | Gestión odontológica y agenda clínica",
   description:
     "DentalNet es la plataforma de Clyclick para administrar pacientes, historia clínica y agenda odontológica, con sincronización opcional con Google Calendar.",

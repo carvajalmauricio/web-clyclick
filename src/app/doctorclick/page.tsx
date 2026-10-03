@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { ProductPage } from "@/components/product-page";
 export const metadata: Metadata = {
-  title: "Doctorclick — Clyclick",
+  title: "Doctorclick — Software para consultorios médicos | Clyclick",
   description:
     "Gestiona pacientes, doctores y la atención por especialidad, con calendario y facturación electrónica.",
   alternates: { canonical: "/doctorclick" },

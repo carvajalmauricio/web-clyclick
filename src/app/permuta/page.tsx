@@ -1,5 +1,12 @@
+import type { Metadata } from "next";
 import { wa } from "@/lib/site";
 import { PermutaConsiste } from "@/components/permuta-consiste";
+
+export const metadata: Metadata = {
+  title: "Programa de Permuta — Intercambia productos por tecnología | Clyclick",
+  description: "Propón un intercambio de productos o servicios por soluciones de tecnología de Clyclick. Consulta cómo funciona y acuerda las condiciones.",
+  alternates: { canonical: "/permuta" },
+};
 
 const BRAND = "#023A5E";
 const WA_PERMUTA = wa(

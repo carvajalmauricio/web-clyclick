@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { ProductPage } from "@/components/product-page";
 export const metadata: Metadata = {
-  title: "Ecommerce Click — Clyclick",
+  title: "Ecommerce Click — Tienda online con facturación electrónica | Clyclick",
   description:
     "Vende en línea con catálogo, pedidos, seguimiento y dashboard administrativo. Incluye conexión logística y facturación electrónica.",
   alternates: { canonical: "/ecommerce" },

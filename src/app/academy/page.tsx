@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { ProductPage } from "@/components/product-page";
 export const metadata: Metadata = {
-  title: "Clyclick Academy — Clyclick",
+  title: "Clyclick Academy — Sesiones prácticas de IA y tecnología",
   description:
     "Sesiones de aproximadamente dos horas sobre un tema específico. Acordamos el nivel y el alcance antes de reservar.",
   alternates: { canonical: "/academy" },

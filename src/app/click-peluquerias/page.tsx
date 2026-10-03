@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { ProductPage } from "@/components/product-page";
 export const metadata: Metadata = {
-  title: "Click Peluquerías — Clyclick",
+  title: "Click Peluquerías — Software de citas y gestión de estilistas | Clyclick",
   description:
     "Gestiona la atención en tu local o a domicilio con una solución para peluquerías y barberías.",
   alternates: { canonical: "/click-peluquerias" },

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-export const metadata: Metadata = { title: "Preguntas frecuentes — Clyclick" };
+export const metadata: Metadata = {
+  alternates: { canonical: "/faq" }, title: "Preguntas frecuentes — Clyclick", description: "Resuelve dudas sobre precios, demos, pruebas gratuitas, soporte, facturación y contratación de los productos de Clyclick." };
 const questions = [
   [
     "¿Cómo elijo un producto?",

@@ -60,7 +60,7 @@ export const nav: NavItem[] = [
         label: "Consultorías",
         href: "/contacto",
         links: [
-          { label: "Capacitación", href: "/capacitacion" },
+          { label: "Capacitación", href: "/academy" },
           { label: "Consultoría de IA", href: "/consultoria-ia" },
           { label: "Desarrollo con IA", href: "/desarrollo-ia" },
           { label: "Power BI / Business Intelligence", href: "/power-bi" },

@@ -1,7 +1,14 @@
+import type { Metadata } from "next";
 import { MessageCircle } from "lucide-react";
 import { CalendlyPopupLink } from "@/components/calendly-popup-link";
 import { ContactLocations } from "@/components/contact-locations";
 import { wa } from "@/lib/site";
+
+export const metadata: Metadata = {
+  title: "Contacto — Software y tecnología para tu negocio | Clyclick",
+  description: "Consulta productos, demos y proyectos de tecnología para tu negocio. Contacta con Clyclick por WhatsApp o agenda una reunión.",
+  alternates: { canonical: "/contacto" },
+};
 
 export default function Page() {
   return (

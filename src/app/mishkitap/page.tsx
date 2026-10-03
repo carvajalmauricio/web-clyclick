@@ -3,7 +3,7 @@ import { ProjectShowcase } from "@/components/project-showcase";
 import { wa } from "@/lib/site";
 import { ProductPage } from "@/components/product-page";
 export const metadata: Metadata = {
-  title: "Mishkitap — Clyclick",
+  title: "Mishkitap — Software para restaurantes en Ecuador | Clyclick",
   description:
     "Organiza tu restaurante con POS, menú QR y pedidos desde la mesa. Desde $30/mes, con funciones y límites según el plan.",
   alternates: { canonical: "/mishkitap" },

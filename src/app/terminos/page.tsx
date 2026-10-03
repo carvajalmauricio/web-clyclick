@@ -3,6 +3,7 @@ import Link from "next/link";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/terminos" },
   title: "Términos del Servicio | Clyclick y DentalNet",
   description: "Términos generales de uso de los servicios y plataformas de CLYCLICK S.A.S., incluido DentalNet.",
 };

@@ -1,8 +1,15 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { CheckCircle2, MapPin } from "lucide-react";
 import { AboutImageCarousel } from "@/components/about-image-carousel";
 import { CalendlyPopupLink } from "@/components/calendly-popup-link";
 import { site } from "@/lib/site";
+
+export const metadata: Metadata = {
+  title: "Nosotros — Clyclick, tecnología para negocios en Ecuador",
+  description: "Conoce a Clyclick, nuestros valores y cómo acompañamos a los negocios con software, sitios web y soluciones de tecnología.",
+  alternates: { canonical: "/nosotros" },
+};
 
 const VALUES = [
   "Cercanía con cada negocio y sus desafíos reales.",

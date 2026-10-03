@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { ProductPage } from "@/components/product-page";
 export const metadata: Metadata = {
-  title: "Websites — Clyclick",
+  title: "Páginas web para negocios desde $150 — Clyclick",
   description:
     "Desde $150 para una landing page o hasta tres páginas informativas, con llamadas a la acción. El alcance y precio final se acuerdan en la propuesta.",
   alternates: { canonical: "/websites" },
