@@ -113,7 +113,7 @@ export function ContactLocations() {
                   href={location.mapUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 bg-[#C2410C] px-6 py-3.5 text-sm font-bold uppercase tracking-widest text-white transition-colors hover:bg-[#9A3412] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FB923C] focus-visible:ring-offset-2 focus-visible:ring-offset-brand"
+                  className="inline-flex items-center justify-center gap-2 bg-[#FB923C] px-6 py-3.5 text-sm font-bold uppercase tracking-widest text-[#17212B] transition-colors hover:bg-[#FDBA74] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-brand"
                 >
                   <Navigation className="h-4 w-4" aria-hidden="true" />
                   Cómo llegar

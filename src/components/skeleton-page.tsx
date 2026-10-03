@@ -36,7 +36,7 @@ export function SkeletonPage({
           )}
           target="_blank"
           rel="noopener noreferrer"
-          className="bg-[#C2410C] px-8 py-3.5 text-sm font-bold uppercase tracking-widest text-white transition-colors duration-200 hover:bg-[#9A3412] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FB923C] focus-visible:ring-offset-2"
+          className="bg-[#FB923C] px-8 py-3.5 text-sm font-bold uppercase tracking-widest text-[#17212B] transition-colors duration-200 hover:bg-[#FDBA74] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
         >
           {cta}
         </a>

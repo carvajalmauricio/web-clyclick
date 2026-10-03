@@ -93,7 +93,7 @@ function WhatsAppButton({ className = "" }: { className?: string }) {
       href={trialHref}
       target="_blank"
       rel="noopener noreferrer"
-      className={`inline-flex min-h-12 items-center justify-center gap-2 bg-[#C2410C] px-6 py-3 text-sm font-extrabold uppercase tracking-[0.12em] text-white transition-colors hover:bg-[#9A3412] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FB923C] focus-visible:ring-offset-2 ${className}`}
+      className={`inline-flex min-h-12 items-center justify-center gap-2 bg-[#FB923C] px-6 py-3 text-sm font-extrabold uppercase tracking-[0.12em] text-[#17212B] transition-colors hover:bg-[#FDBA74] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${className}`}
     >
       Probar gratis 7 días
       <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -133,7 +133,7 @@ function DashboardPreview() {
               </p>
               <p className="mt-1 text-3xl font-extrabold text-white">8 citas</p>
               <div className="mt-4 h-1.5 bg-white/10">
-                <div className="h-full w-3/4 bg-[#C2410C]" />
+                <div className="h-full w-3/4 bg-[#FB923C]" />
               </div>
             </div>
             <div className="border border-white/10 bg-white/[0.06] p-4">
@@ -202,7 +202,7 @@ export function OdontoclickLanding() {
         <div className="mx-auto grid max-w-7xl items-center gap-14 px-4 py-20 sm:px-6 sm:py-24 lg:grid-cols-[1.05fr_0.95fr] lg:py-28">
           <div>
             <div className="mb-6 inline-flex items-center gap-2 border border-sky-300/25 bg-sky-300/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.18em] text-sky-200">
-              <span className="h-2 w-2 rounded-full bg-[#C2410C]" />
+              <span className="h-2 w-2 rounded-full bg-[#FB923C]" />
               Software dental para Ecuador
             </div>
             <h1 className="max-w-3xl text-4xl font-extrabold leading-[1.05] sm:text-5xl lg:text-6xl">
@@ -321,7 +321,7 @@ export function OdontoclickLanding() {
               ],
             ].map(([number, title, copy]) => (
               <li key={number} className="bg-white p-7">
-                <span className="text-xs font-extrabold tracking-[0.2em] text-[#C2410C]">
+                <span className="text-xs font-extrabold tracking-[0.2em] text-primary">
                   {number}
                 </span>
                 <h3 className="mt-4 text-xl font-bold text-navy">{title}</h3>
@@ -401,7 +401,7 @@ export function OdontoclickLanding() {
                       <StepIcon className="h-5 w-5" aria-hidden="true" />
                     </div>
                     <div>
-                      <p className="text-xs font-extrabold uppercase tracking-[0.16em] text-[#C2410C]">
+                      <p className="text-xs font-extrabold uppercase tracking-[0.16em] text-primary">
                         Paso {index + 1}
                       </p>
                       <h3 className="mt-1 text-xl font-bold text-navy">

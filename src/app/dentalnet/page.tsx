@@ -52,7 +52,7 @@ export default function DentalNetPage() {
               )}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-[#C2410C] px-7 py-3.5 text-sm font-bold uppercase tracking-wider text-white transition-colors hover:bg-[#9A3412] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+              className="bg-[#FB923C] px-7 py-3.5 text-sm font-bold uppercase tracking-wider text-[#17212B] transition-colors hover:bg-[#FDBA74] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
             >
               Solicitar información
             </a>

@@ -200,12 +200,12 @@
 
 /* Link inline reutilizable — naranja, mayúsculas, subrayado */
 .link-inline {
-  color: #c2410c;
+  color: #0369a1;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   text-decoration: underline;
-  text-decoration-color: #c2410c;
+  text-decoration-color: #0369a1;
   text-underline-offset: 4px;
   text-decoration-thickness: 2px;
   transition: opacity 0.2s;
@@ -216,7 +216,7 @@
 
 @layer components {
   .cta {
-    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-[#C2410C] px-6 py-3 text-center font-semibold text-white transition-colors hover:bg-[#9A3412];
+    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-[#FB923C] px-6 py-3 text-center font-semibold text-[#17212B] transition-colors hover:bg-[#FDBA74];
   }
 }
 @layer base {
@@ -247,4 +247,77 @@
 
 header .nav-disclosure-panel :where(a, button):focus-visible {
   outline-color: #0369a1;
+}
+
+/* Homepage product explorer: short entrance motion, then a still interface. */
+.hero-wash {
+  background:
+    radial-gradient(ellipse at 82% 30%, #16496b 0%, transparent 55%),
+    radial-gradient(ellipse at 8% 100%, #1d3846 0%, transparent 60%);
+}
+.hero-wordmark {
+  color: #fff;
+  opacity: 0.025;
+}
+.hero-workbench {
+  perspective: 1200px;
+}
+.hero-console {
+  animation: hero-assemble 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.hero-trace {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: hero-draw 3.4s ease-out 0.1s forwards;
+}
+.hero-choice {
+  transition:
+    background-color 0.2s,
+    border-color 0.2s,
+    transform 0.2s;
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .hero-choice:hover {
+    transform: translateY(-3px);
+  }
+  .hero-primary:hover svg {
+    transform: translateX(3px);
+  }
+}
+.hero-primary svg {
+  transition: transform 0.2s;
+}
+.hero-scene :where(a, button):focus-visible {
+  outline-color: #fb923c;
+}
+.hero-scene .hero-product-panel a:focus-visible {
+  outline-color: #0369a1;
+}
+.hero-choice[aria-pressed="true"]:focus-visible {
+  outline-color: #fff;
+}
+@keyframes hero-assemble {
+  from {
+    transform: translateY(18px) rotateY(-7deg);
+  }
+  to {
+    transform: translateY(0) rotateY(0);
+  }
+}
+@keyframes hero-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-console,
+  .hero-trace {
+    animation: none !important;
+  }
+  .hero-trace {
+    stroke-dashoffset: 0;
+  }
+  .hero-choice {
+    transform: none !important;
+  }
 }

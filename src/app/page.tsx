@@ -1,3 +1,4 @@
+import { ProjectShowcase } from "@/components/project-showcase";
 import { Hero } from "@/components/hero";
 import {
   ProductGrid,
@@ -12,6 +13,7 @@ export default function Home() {
     <>
       <Hero />
       <Niches />
+      <ProjectShowcase />
       <WhyClyclick />
       <CustomDevBlock />
       <ProductGrid />

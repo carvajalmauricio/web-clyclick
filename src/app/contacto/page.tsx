@@ -20,7 +20,7 @@ export default function Page() {
             servicio o solución que mejor encaje contigo.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <CalendlyPopupLink className="inline-flex items-center justify-center bg-[#C2410C] px-7 py-3.5 text-sm font-bold uppercase tracking-widest text-white transition-colors hover:bg-[#9A3412] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FB923C] focus-visible:ring-offset-2 focus-visible:ring-offset-brand">
+            <CalendlyPopupLink className="inline-flex items-center justify-center bg-[#FB923C] px-7 py-3.5 text-sm font-bold uppercase tracking-widest text-[#17212B] transition-colors hover:bg-[#FDBA74] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-brand">
               Agendar una reunión
             </CalendlyPopupLink>
             <a
